@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Shopping list example</title>
+        <style>
+            li {
+                margin-bottom: 10px;
+            }
+
+            li button {
+                font-size: 8px;
+                margin-left: 20px;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My shopping list</h1>
+
+        <div>
+            <label for="item">Enter a new item:</label>
+            <input type="text" name="item" id="item" />
+            <button id="addButton">Add item</button>
+        </div>
+
+        <ul id="shoppingList"></ul>
+
+        <script>
+            // Create references to elements
+            const shoppingList = document.getElementById("shoppingList");
+            const input = document.getElementById("item");
+            const addButton = document.getElementById("addButton");
+
+            // Function to add an item to the list
+            addButton.addEventListener("click", function () {
+                const newItemValue = input.value;
+                input.value = "";
+
+                const listItem = document.createElement("li");
+                const span = document.createElement("span");
+                const deleteButton = document.createElement("button");
+
+                span.textContent = newItemValue;
+                deleteButton.textContent = "Delete";
+
+                deleteButton.addEventListener("click", function () {
+                    shoppingList.removeChild(listItem);
+                });
+
+                listItem.appendChild(span);
+                listItem.appendChild(deleteButton);
+                shoppingList.appendChild(listItem);
+
+                input.focus();
+            });
+        </script>
+    </body>
+</html>
